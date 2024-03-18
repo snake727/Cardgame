@@ -1,4 +1,4 @@
-package no.ntnu.idatt2003;
+package no.ntnu.idatt2003.model;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
