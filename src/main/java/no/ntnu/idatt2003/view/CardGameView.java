@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import no.ntnu.idatt2003.controller.CardGameController;
@@ -16,7 +17,7 @@ import no.ntnu.idatt2003.model.HandOfCards;
 /**
  * This class creates and handles the GUI components of the game
  *
- * @version 0.3.0
+ * @version 0.4.0
  * @author Snake727
  */
 
@@ -31,10 +32,14 @@ public class CardGameView extends Application {
     imageController = new CardGameImageController();
     hand = new HandOfCards(); // Initialize the hand of cards
 
+    // Set the minimum size of the display area
+    primaryStage.setMinWidth(1920);
+    primaryStage.setMinHeight(1080);
+
     VBox root = new VBox(10);
     root.setPadding(new Insets(15, 20, 10, 10));
 
-    HBox cardsDisplayArea = new HBox(5);
+    FlowPane cardsDisplayArea = new FlowPane(5,5);
     cardsDisplayArea.setStyle("-fx-border-color: black; -fx-background-color: grey;");
     cardsDisplayArea.setPadding(new Insets(5));
     cardsDisplayArea.setPrefSize(300, 120); // Set the preferred size for the display area
@@ -85,11 +90,13 @@ public class CardGameView extends Application {
       cardsDisplayArea.getChildren().clear();
 
       // Generate a new hand of cards
-      hand = controller.dealHand(); // Assuming 5 cards are dealt
+      hand = controller.dealHand();
 
       // Load and display images for each card in the hand
       ImageView[] cardImages = imageController.getHandImageViews(hand);
       for (ImageView cardImage : cardImages) {
+        cardImage.setFitWidth(100);
+        cardImage.setFitHeight(150);
         cardsDisplayArea.getChildren().add(cardImage);
       }
     });

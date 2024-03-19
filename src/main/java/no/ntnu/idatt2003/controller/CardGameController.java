@@ -9,13 +9,14 @@ import java.util.Random;
 /**
  * This class is the controller for the card game
  *
- * @version 0.3.0
+ * @version 0.4.0
  * @author Snake727
  */
 
 public class CardGameController {
   private DeckOfCards deck;
   private CardGameView view;
+  Random random = new Random();
 
   public CardGameController(CardGameView view) {
     this.view = view;
@@ -23,7 +24,8 @@ public class CardGameController {
   }
 
   public HandOfCards dealHand() {
-    int randomValue = new Random().nextInt(52);
+    deck = new DeckOfCards();
+    int randomValue = random.nextInt(52) + 1;
     return deck.dealHand(randomValue);
   }
 
