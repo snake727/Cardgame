@@ -3,11 +3,13 @@ package no.ntnu.idatt2003.controller;
 import no.ntnu.idatt2003.model.DeckOfCards;
 import no.ntnu.idatt2003.model.HandOfCards;
 import no.ntnu.idatt2003.view.CardGameView;
+import java.util.Random;
+
 
 /**
  * This class is the controller for the card game
  *
- * @version 0.2.0
+ * @version 0.3.0
  * @author Snake727
  */
 
@@ -20,12 +22,9 @@ public class CardGameController {
     this.deck = new DeckOfCards();
   }
 
-  public void dealHand() {
-    // Deal a hand of cards and update the view
-  }
-
-  public void checkHand() {
-    // Check the hand of cards and update the view
+  public HandOfCards dealHand() {
+    int randomValue = new Random().nextInt(52);
+    return deck.dealHand(randomValue);
   }
 
   // Method for calculating sum

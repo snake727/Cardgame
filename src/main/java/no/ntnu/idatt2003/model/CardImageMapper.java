@@ -3,7 +3,7 @@ package no.ntnu.idatt2003.model;
 /**
  * This class is responsible for mapping a PlayingCard to its corresponding image file.
  *
- * @version 0.1.0
+ * @version 0.2.0
  * @author Snake727
  */
 public class CardImageMapper {
@@ -15,23 +15,8 @@ public class CardImageMapper {
    * @return the path to the image file
    */
   public String getImagePath(PlayingCard card) {
-    String rank;
-    switch (card.getRank()) {
-      case 1:
-        rank = "ace";
-        break;
-      case 11:
-        rank = "jack";
-        break;
-      case 12:
-        rank = "queen";
-        break;
-      case 13:
-        rank = "king";
-        break;
-      default:
-        rank = String.valueOf(card.getRank());
-    }
-    return "/" + rank + "_of_" + card.getSuit().toLowerCase() + ".png";
+    String rank = String.valueOf(card.getFace());
+    String suit = String.valueOf(card.getSuit()).toUpperCase();
+    return "/" + rank + "_of_" + suit + ".png";
   }
 }

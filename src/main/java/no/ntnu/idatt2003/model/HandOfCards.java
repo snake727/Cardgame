@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 /**
  * Represents a hand of cards. A hand of cards can have any number of cards.
  *
- * @version 0.2.0
+ * @version 0.3.0
  * @author Snake727
  */
 public class HandOfCards {
@@ -28,6 +28,14 @@ public class HandOfCards {
 
   public List<PlayingCard> getHand() {
     return hand;
+  }
+
+  public int size() {
+    return hand.size();
+  }
+
+  public PlayingCard getCard(int index) {
+    return hand.get(index);
   }
 
   public int calculateSum() {

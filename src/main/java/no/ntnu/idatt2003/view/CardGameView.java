@@ -5,53 +5,42 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import no.ntnu.idatt2003.controller.CardGameController;
+import no.ntnu.idatt2003.controller.CardGameImageController;
 import no.ntnu.idatt2003.model.HandOfCards;
 
 /**
  * This class creates and handles the GUI components of the game
  *
- * @version 0.2.0
+ * @version 0.3.0
  * @author Snake727
  */
+
 public class CardGameView extends Application {
   private CardGameController controller;
+  private CardGameImageController imageController;
   private HandOfCards hand;
 
   @Override
   public void start(Stage primaryStage) {
     controller = new CardGameController(this);
+    imageController = new CardGameImageController();
     hand = new HandOfCards(); // Initialize the hand of cards
 
     VBox root = new VBox(10);
     root.setPadding(new Insets(15, 20, 10, 10));
 
-    // Reserved area for displaying card images
     HBox cardsDisplayArea = new HBox(5);
     cardsDisplayArea.setStyle("-fx-border-color: black; -fx-background-color: grey;");
     cardsDisplayArea.setPadding(new Insets(5));
     cardsDisplayArea.setPrefSize(300, 120); // Set the preferred size for the display area
 
-    // Load an image and create an ImageView object
-    Image image = new Image(getClass().getResource("/card.png").toExternalForm()); // Load image from resources folder
-    ImageView imageView = new ImageView(image);
-
-
-    // Add the ImageView to the cardsDisplayArea
-    cardsDisplayArea.getChildren().add(imageView);
-
     Button dealHandButton = new Button("Deal Hand");
     Button checkHandButton = new Button("Check Hand");
-
-    // Add event handlers to the buttons
-    dealHandButton.setOnAction(e -> controller.dealHand());
-    checkHandButton.setOnAction(e -> controller.checkHand());
 
     // Display-only fields
     Label sumOfFacesLabel = new Label("Sum of the faces:");
@@ -82,6 +71,28 @@ public class CardGameView extends Application {
           new HBox(5, flushLabel, flushValue),
           new HBox(5, queenOfSpadesLabel, queenOfSpadesValue)
     );
+
+    checkHandButton.setOnAction(e -> {
+      // Call the methods on the HandOfCards object and update the labels
+      sumOfFacesValue.setText(String.valueOf(controller.calculateSum(hand)));
+      cardsOfHeartsValue.setText(controller.getHearts(hand));
+      flushValue.setText(controller.hasFlush(hand) ? "Yes" : "No");
+      queenOfSpadesValue.setText(controller.hasQueenOfSpades(hand) ? "Yes" : "No");
+    });
+
+    dealHandButton.setOnAction(e -> {
+      // Clear the display area
+      cardsDisplayArea.getChildren().clear();
+
+      // Generate a new hand of cards
+      hand = controller.dealHand(); // Assuming 5 cards are dealt
+
+      // Load and display images for each card in the hand
+      ImageView[] cardImages = imageController.getHandImageViews(hand);
+      for (ImageView cardImage : cardImages) {
+        cardsDisplayArea.getChildren().add(cardImage);
+      }
+    });
 
     // Add all components to the root container
     root.getChildren().addAll(cardsDisplayArea, dealHandButton, checkHandButton, statusFields);

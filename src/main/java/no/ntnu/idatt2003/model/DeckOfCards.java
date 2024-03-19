@@ -1,34 +1,35 @@
 package no.ntnu.idatt2003.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 /**
- * Represents a deck of cards. A deck of cards has 52 cards, 13 of each suit.
+ * This class represents a deck of cards
  *
- * @version 0.2.0
+ * @version 0.3.0
  * @author Snake727
  */
+
 public class DeckOfCards {
-  private final char[] suit = {'S', 'H', 'D', 'C'};
+  private static final char[] SUITS = {'S', 'H', 'D', 'C'};
   private final List<PlayingCard> deck;
   private final Random random;
 
   public DeckOfCards() {
     deck = new ArrayList<>();
     random = new Random();
-    // Create 52 cards
-    for (char s : suit) {
+    for (char suit : SUITS) {
       for (int j = 1; j <= 13; j++) {
-        PlayingCard card = new PlayingCard(s, j);
+        PlayingCard card = new PlayingCard(suit, j);
         deck.add(card);
       }
     }
   }
 
   public List<PlayingCard> getDeck() {
-    return deck;
+    return Collections.unmodifiableList(deck);
   }
 
   public HandOfCards dealHand(int n) {
@@ -36,16 +37,16 @@ public class DeckOfCards {
       throw new IllegalArgumentException("Parameter n must be a number between 1 to 52");
     }
 
+    if (deck.isEmpty()) {
+      throw new IllegalStateException("Deck is empty, cannot deal card");
+    }
+
     HandOfCards hand = new HandOfCards();
 
-    for (int i = 0; i < n; i++) {
-      if (!deck.isEmpty()) {
-        int index = random.nextInt(deck.size());
-        PlayingCard card = deck.remove(index);
-        hand.addCard(card);
-      } else {
-        throw new IllegalStateException("Deck is empty, cannot deal card");
-      }
+    for (int i = n - 1; i >= 0; i--) {
+      int index = random.nextInt(deck.size());
+      PlayingCard card = deck.remove(index);
+      hand.addCard(card);
     }
 
     return hand;
