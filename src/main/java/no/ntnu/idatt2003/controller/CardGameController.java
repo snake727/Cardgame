@@ -7,7 +7,7 @@ import no.ntnu.idatt2003.view.CardGameView;
 /**
  * This class is the controller for the card game
  *
- * @version 0.1.0
+ * @version 0.2.0
  * @author Snake727
  */
 
