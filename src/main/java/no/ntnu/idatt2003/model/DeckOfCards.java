@@ -8,12 +8,15 @@ import java.util.Random;
 /**
  * This class represents a deck of cards
  *
- * @version 0.3.0
+ * @version 0.4.0
  * @author Snake727
  */
 
 public class DeckOfCards {
   private static final char[] SUITS = {'S', 'H', 'D', 'C'};
+  public static char[] getSuits() {
+    return SUITS.clone();
+  }
   private final List<PlayingCard> deck;
   private final Random random;
 
@@ -33,8 +36,8 @@ public class DeckOfCards {
   }
 
   public HandOfCards dealHand(int n) {
-    if (n < 1 || n > 52) {
-      throw new IllegalArgumentException("Parameter n must be a number between 1 to 52");
+    if (n < 5 || n > 52) {
+      throw new IllegalArgumentException("Parameter n must be a number between 5 to 52");
     }
 
     if (deck.isEmpty()) {

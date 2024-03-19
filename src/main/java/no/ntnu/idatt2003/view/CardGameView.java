@@ -17,7 +17,7 @@ import no.ntnu.idatt2003.model.HandOfCards;
 /**
  * This class creates and handles the GUI components of the game
  *
- * @version 0.4.0
+ * @version 0.5.0
  * @author Snake727
  */
 
@@ -28,7 +28,7 @@ public class CardGameView extends Application {
 
   @Override
   public void start(Stage primaryStage) {
-    controller = new CardGameController(this);
+    controller = new CardGameController();
     imageController = new CardGameImageController();
     hand = new HandOfCards(); // Initialize the hand of cards
 
@@ -77,6 +77,12 @@ public class CardGameView extends Application {
           new HBox(5, queenOfSpadesLabel, queenOfSpadesValue)
     );
 
+    // Initialize the status fields with default values
+    sumOfFacesValue.setText("0");
+    cardsOfHeartsValue.setText("No Hearts");
+    flushValue.setText("No");
+    queenOfSpadesValue.setText("No");
+
     checkHandButton.setOnAction(e -> {
       // Call the methods on the HandOfCards object and update the labels
       sumOfFacesValue.setText(String.valueOf(controller.calculateSum(hand)));
@@ -99,6 +105,12 @@ public class CardGameView extends Application {
         cardImage.setFitHeight(150);
         cardsDisplayArea.getChildren().add(cardImage);
       }
+
+      // Reset the status fields
+      sumOfFacesValue.setText("0");
+      cardsOfHeartsValue.setText("");
+      flushValue.setText("No");
+      queenOfSpadesValue.setText("No");
     });
 
     // Add all components to the root container
