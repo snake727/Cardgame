@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * This class is responsible for handling the images in the card game
  *
- * @version 0.3.0
+ * @version 0.4.0
  * @author Snake727
  */
 public class CardGameImageController {
@@ -27,8 +27,8 @@ public class CardGameImageController {
 
     ImageView imageView = new ImageView(image);
     // Set the initial size of the card images
-    imageView.setFitWidth(100);
-    imageView.setFitHeight(150);
+    imageView.setFitWidth(70);
+    imageView.setFitHeight(100);
 
     return new ImageView(image);
   }

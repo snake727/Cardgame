@@ -17,7 +17,7 @@ import no.ntnu.idatt2003.model.HandOfCards;
 /**
  * This class creates and handles the GUI components of the game
  *
- * @version 0.6.0
+ * @version 0.7.0
  * @author Snake727
  */
 
@@ -45,6 +45,7 @@ public class CardGameView extends Application {
     cardsDisplayArea.setPadding(new Insets(5));
     cardsDisplayArea.setPrefSize(300, 120); // Set the preferred size for the display area
 
+    // Creates the buttons
     Button dealHandButton = new Button("Deal Hand");
     Button checkHandButton = new Button("Check Hand");
 
@@ -77,6 +78,24 @@ public class CardGameView extends Application {
           new HBox(5, flushLabel, flushValue),
           new HBox(5, queenOfSpadesLabel, queenOfSpadesValue)
     );
+
+    // Set the preferred size for the status fields
+    sumOfFacesValue.setPrefSize(sumOfFacesValue.getPrefWidth() * 3, sumOfFacesValue.getPrefHeight() * 3);
+    cardsOfHeartsValue.setPrefSize(cardsOfHeartsValue.getPrefWidth() * 3, cardsOfHeartsValue.getPrefHeight() * 3);
+    flushValue.setPrefSize(flushValue.getPrefWidth() * 3, flushValue.getPrefHeight() * 3);
+    queenOfSpadesValue.setPrefSize(queenOfSpadesValue.getPrefWidth() * 3, queenOfSpadesValue.getPrefHeight() * 3);
+
+    // Set the text color for the status description fields
+    sumOfFacesLabel.setStyle("-fx-text-fill: white;");
+    cardsOfHeartsLabel.setStyle("-fx-text-fill: white;");
+    flushLabel.setStyle("-fx-text-fill: white;");
+    queenOfSpadesLabel.setStyle("-fx-text-fill: white;");
+
+    // Set the background color for the status info fields
+    sumOfFacesValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+    cardsOfHeartsValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+    flushValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+    queenOfSpadesValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
 
     // Initialize the status fields with default values
     sumOfFacesValue.setText("0");
