@@ -17,7 +17,7 @@ import no.ntnu.idatt2003.model.HandOfCards;
 /**
  * This class creates and handles the GUI components of the game
  *
- * @version 0.5.0
+ * @version 0.6.0
  * @author Snake727
  */
 
@@ -33,11 +33,12 @@ public class CardGameView extends Application {
     hand = new HandOfCards(); // Initialize the hand of cards
 
     // Set the minimum size of the display area
-    primaryStage.setMinWidth(1920);
-    primaryStage.setMinHeight(1080);
+    primaryStage.setMinWidth(1080);
+    primaryStage.setMinHeight(720);
 
     VBox root = new VBox(10);
     root.setPadding(new Insets(15, 20, 10, 10));
+    root.setStyle("-fx-background-color: black;");
 
     FlowPane cardsDisplayArea = new FlowPane(5,5);
     cardsDisplayArea.setStyle("-fx-border-color: black; -fx-background-color: grey;");
@@ -101,8 +102,8 @@ public class CardGameView extends Application {
       // Load and display images for each card in the hand
       ImageView[] cardImages = imageController.getHandImageViews(hand);
       for (ImageView cardImage : cardImages) {
-        cardImage.setFitWidth(100);
-        cardImage.setFitHeight(150);
+        cardImage.setFitWidth(70);
+        cardImage.setFitHeight(100);
         cardsDisplayArea.getChildren().add(cardImage);
       }
 

@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * This class is the controller for the card game
  *
- * @version 0.5.0
+ * @version 0.6.0
  * @author Snake727
  */
 
@@ -25,7 +25,7 @@ public class CardGameController {
    */
   public HandOfCards dealHand() {
     deck = new DeckOfCards();
-    int randomValue = random.nextInt(52) + 1;
+    int randomValue = random.nextInt(52 - 5 + 1) + 5;
     return deck.dealHand(randomValue);
   }
 

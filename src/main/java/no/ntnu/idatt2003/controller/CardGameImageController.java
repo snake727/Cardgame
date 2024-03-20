@@ -15,7 +15,7 @@ import java.util.Objects;
  * @author Snake727
  */
 public class CardGameImageController {
-  private CardImageMapper mapper;
+  private final CardImageMapper mapper;
 
   public CardGameImageController() {
     this.mapper = new CardImageMapper();
