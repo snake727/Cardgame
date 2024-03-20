@@ -22,12 +22,12 @@ import no.ntnu.idatt2003.model.HandOfCards;
  */
 
 public class CardGameView extends Application {
-  private CardGameController controller;
-  private CardGameImageController imageController;
-  private HandOfCards hand;
-
+  HandOfCards hand = new HandOfCards();
+  CardGameController controller = new CardGameController();
+  CardGameImageController imageController = new CardGameImageController();
   @Override
   public void start(Stage primaryStage) {
+    // Declare the necessary variables
     controller = new CardGameController();
     imageController = new CardGameImageController();
     hand = new HandOfCards(); // Initialize the hand of cards
@@ -86,19 +86,21 @@ public class CardGameView extends Application {
     );
 
     // Set the text color for the status description fields
-    sumOfFacesLabel.setStyle("-fx-text-fill: white;");
-    cardsOfHeartsLabel.setStyle("-fx-text-fill: white;");
-    flushLabel.setStyle("-fx-text-fill: white;");
-    queenOfSpadesLabel.setStyle("-fx-text-fill: white;");
+    String statusDescriptionStyle = "-fx-text-fill: white;";
+    sumOfFacesLabel.setStyle(statusDescriptionStyle);
+    cardsOfHeartsLabel.setStyle(statusDescriptionStyle);
+    flushLabel.setStyle(statusDescriptionStyle);
+    queenOfSpadesLabel.setStyle(statusDescriptionStyle);
 
     // Set the background color for the status info fields
+    String statusInfoBackgroundStyle = "-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;";
     sumOfFacesValue.setStyle(
-        "-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+        statusInfoBackgroundStyle);
     cardsOfHeartsValue.setStyle(
-        "-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
-    flushValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+        statusInfoBackgroundStyle);
+    flushValue.setStyle(statusInfoBackgroundStyle);
     queenOfSpadesValue.setStyle(
-        "-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+        statusInfoBackgroundStyle);
 
     // Initialize the status fields with default values
     sumOfFacesValue.setText("0");
