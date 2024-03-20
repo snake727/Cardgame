@@ -17,7 +17,7 @@ import no.ntnu.idatt2003.model.HandOfCards;
 /**.
  * This class creates and handles the GUI components of the game
  *
- * @version 0.7.0
+ * @version 1.0.0
  * @author Snake727
  */
 
