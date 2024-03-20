@@ -1,12 +1,12 @@
 package no.ntnu.idatt2003.controller;
 
+import java.util.Random;
 import no.ntnu.idatt2003.model.DeckOfCards;
 import no.ntnu.idatt2003.model.HandOfCards;
-import java.util.Random;
-
 
 /**
- * This class is the controller for the card game
+ * This class is the controller for the card game.
+ * It handles the required operations for the GUI to function properly.
  *
  * @version 0.6.0
  * @author Snake727
@@ -19,8 +19,12 @@ public class CardGameController {
   public CardGameController() {
     this.deck = new DeckOfCards();
   }
+
   /**
-   * Method for dealing a hand of cards anywhere between 5 and 52 cards
+   * Method for dealing a hand of cards anywhere between 5 and 52 cards.
+   * Here the random class is used with additional logic in the randomValue
+   * variable in order to ensure there are always at least 5 cards in a hand.
+   *
    * @return a hand of cards from 5 to 52 cards
    */
   public HandOfCards dealHand() {

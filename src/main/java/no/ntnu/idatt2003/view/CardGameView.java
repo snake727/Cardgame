@@ -6,15 +6,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import no.ntnu.idatt2003.controller.CardGameController;
 import no.ntnu.idatt2003.controller.CardGameImageController;
 import no.ntnu.idatt2003.model.HandOfCards;
 
-/**
+/**.
  * This class creates and handles the GUI components of the game
  *
  * @version 0.7.0
@@ -36,39 +36,45 @@ public class CardGameView extends Application {
     primaryStage.setMinWidth(1080);
     primaryStage.setMinHeight(720);
 
+    // Create the root container
     VBox root = new VBox(10);
     root.setPadding(new Insets(15, 20, 10, 10));
     root.setStyle("-fx-background-color: black;");
 
-    FlowPane cardsDisplayArea = new FlowPane(5,5);
+    // Create the display area for the cards
+    FlowPane cardsDisplayArea = new FlowPane(5, 5);
     cardsDisplayArea.setStyle("-fx-border-color: black; -fx-background-color: grey;");
     cardsDisplayArea.setPadding(new Insets(5));
     cardsDisplayArea.setPrefSize(300, 120); // Set the preferred size for the display area
 
-    // Creates the buttons
-    Button dealHandButton = new Button("Deal Hand");
-    Button checkHandButton = new Button("Check Hand");
+    // Display style for status fields
+    String statusStyle = "-fx-border-color: black; -fx-padding: 5;";
 
     // Display-only fields
-    Label sumOfFacesLabel = new Label("Sum of the faces:");
-    Label sumOfFacesValue = new Label(String.valueOf(controller.calculateSum(hand))); // Use the calculateSum method
+    Label sumOfFacesValue =
+        new Label(String.valueOf(controller.calculateSum(hand))); // Use the calculateSum method
     sumOfFacesValue.setMinWidth(50);
-    sumOfFacesValue.setStyle("-fx-border-color: black; -fx-padding: 5;");
+    sumOfFacesValue.setStyle(statusStyle);
 
-    Label cardsOfHeartsLabel = new Label("Cards of hearts:");
     Label cardsOfHeartsValue = new Label(controller.getHearts(hand)); // Use the getHearts method
     cardsOfHeartsValue.setMinWidth(120);
-    cardsOfHeartsValue.setStyle("-fx-border-color: black; -fx-padding: 5;");
+    cardsOfHeartsValue.setStyle(statusStyle);
 
-    Label flushLabel = new Label("Flush:");
-    Label flushValue = new Label(controller.hasFlush(hand) ? "Yes" : "No"); // Use the hasFlush method
+    Label flushValue =
+        new Label(controller.hasFlush(hand) ? "Yes" : "No"); // Use the hasFlush method
     flushValue.setMinWidth(50);
-    flushValue.setStyle("-fx-border-color: black; -fx-padding: 5;");
+    flushValue.setStyle(statusStyle);
 
-    Label queenOfSpadesLabel = new Label("Queen of spades:");
-    Label queenOfSpadesValue = new Label(controller.hasQueenOfSpades(hand) ? "Yes" : "No"); // Use the hasQueenOfSpades method
+    Label queenOfSpadesValue =
+        new Label(controller.hasQueenOfSpades(hand) ? "Yes" : "No");
     queenOfSpadesValue.setMinWidth(50);
-    queenOfSpadesValue.setStyle("-fx-border-color: black; -fx-padding: 5;");
+    queenOfSpadesValue.setStyle(statusStyle);
+
+    // Create the status fields
+    Label sumOfFacesLabel = new Label("Sum of the faces:");
+    Label cardsOfHeartsLabel = new Label("Cards of hearts:");
+    Label flushLabel = new Label("Flush:");
+    Label queenOfSpadesLabel = new Label("Queen of spades:");
 
     // Layout for status fields
     VBox statusFields = new VBox(5);
@@ -79,12 +85,6 @@ public class CardGameView extends Application {
           new HBox(5, queenOfSpadesLabel, queenOfSpadesValue)
     );
 
-    // Set the preferred size for the status fields
-    sumOfFacesValue.setPrefSize(sumOfFacesValue.getPrefWidth() * 3, sumOfFacesValue.getPrefHeight() * 3);
-    cardsOfHeartsValue.setPrefSize(cardsOfHeartsValue.getPrefWidth() * 3, cardsOfHeartsValue.getPrefHeight() * 3);
-    flushValue.setPrefSize(flushValue.getPrefWidth() * 3, flushValue.getPrefHeight() * 3);
-    queenOfSpadesValue.setPrefSize(queenOfSpadesValue.getPrefWidth() * 3, queenOfSpadesValue.getPrefHeight() * 3);
-
     // Set the text color for the status description fields
     sumOfFacesLabel.setStyle("-fx-text-fill: white;");
     cardsOfHeartsLabel.setStyle("-fx-text-fill: white;");
@@ -92,10 +92,13 @@ public class CardGameView extends Application {
     queenOfSpadesLabel.setStyle("-fx-text-fill: white;");
 
     // Set the background color for the status info fields
-    sumOfFacesValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
-    cardsOfHeartsValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+    sumOfFacesValue.setStyle(
+        "-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+    cardsOfHeartsValue.setStyle(
+        "-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
     flushValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
-    queenOfSpadesValue.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
+    queenOfSpadesValue.setStyle(
+        "-fx-background-color: white; -fx-border-color: black; -fx-padding: 5;");
 
     // Initialize the status fields with default values
     sumOfFacesValue.setText("0");
@@ -103,6 +106,11 @@ public class CardGameView extends Application {
     flushValue.setText("No");
     queenOfSpadesValue.setText("No");
 
+    // Creates the buttons
+    Button dealHandButton = new Button("Deal Hand");
+    Button checkHandButton = new Button("Check Hand");
+
+    // Set the event handlers for the check hand button
     checkHandButton.setOnAction(e -> {
       // Call the methods on the HandOfCards object and update the labels
       sumOfFacesValue.setText(String.valueOf(controller.calculateSum(hand)));
@@ -111,6 +119,7 @@ public class CardGameView extends Application {
       queenOfSpadesValue.setText(controller.hasQueenOfSpades(hand) ? "Yes" : "No");
     });
 
+    // Set the event handler for the deal hand button
     dealHandButton.setOnAction(e -> {
       // Clear the display area
       cardsDisplayArea.getChildren().clear();
@@ -136,13 +145,10 @@ public class CardGameView extends Application {
     // Add all components to the root container
     root.getChildren().addAll(cardsDisplayArea, dealHandButton, checkHandButton, statusFields);
 
+    // Create the scene and set it to the stage
     Scene scene = new Scene(root);
     primaryStage.setTitle("Cardgame");
     primaryStage.setScene(scene);
     primaryStage.show();
-  }
-
-  public static void main(String[] args) {
-    launch(args);
   }
 }
